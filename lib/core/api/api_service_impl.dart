@@ -15,10 +15,6 @@ import 'package:post_mobile_application/core/models/auth/register/RegisterReques
 class ApiServiceImpl implements ApiService {
   Map<String, String> headers = {"Content-Type": "application/json"};
 
-  @override
-  Future<dynamic> register(RegisterRequest req) async {
-    // Register API will be added here
-  }
 
   @override
   Future<LoginResponse> login(LoginRequest req) async {
@@ -79,7 +75,7 @@ class ApiServiceImpl implements ApiService {
       if (await refreshToken() == true) {
         // Retry
         headers["Authorization"] =
-            "Bearer ${AccessTokenStorage.getAccessToken()}";
+        "Bearer ${AccessTokenStorage.getAccessToken()}";
         var retryResponse = await httpClient.get(
           Uri.parse(url),
           headers: headers,
@@ -94,6 +90,35 @@ class ApiServiceImpl implements ApiService {
     } else {
       return responseBody;
     }
+    return null;
+  }
+
+  @override
+  Future<dynamic> register(RegisterRequest req) async {
+    var url = Uri.parse(UrlConstants.registerPath);
+
+    var requestBody = jsonEncode(req.toJson());
+
+    var response = await httpClient.post(
+      url,
+      headers: headers,
+      body: requestBody,
+    );
+
+    print("==================================");
+    print("REGISTER URL: $url");
+    print("REQUEST: $requestBody");
+    print("STATUS: ${response.statusCode}");
+    print("BODY: ${response.body}");
+    print("==================================");
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      if (response.body.isNotEmpty) {
+        return jsonDecode(response.body);
+      }
+      return true;
+    }
+
     return null;
   }
 }

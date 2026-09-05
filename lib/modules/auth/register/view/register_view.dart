@@ -19,6 +19,7 @@ class RegisterView extends GetView<RegisterController> {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
+              const SizedBox(height: 16),
               TextField(
                 controller: controller.usernameController,
                 decoration: const InputDecoration(
@@ -29,6 +30,24 @@ class RegisterView extends GetView<RegisterController> {
               ),
 
               const SizedBox(height: 16),
+              TextField(
+                controller: controller.firstnameController,
+                decoration: const InputDecoration(
+                  labelText: "Firstname",
+                  hintText: "Enter your firstname",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: controller.lastnameController,
+                decoration: const InputDecoration(
+                  labelText: "Lastname",
+                  hintText: "Enter your lastname",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+
               TextField(
                 controller: controller.emailController,
                 keyboardType: TextInputType.emailAddress,

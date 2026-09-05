@@ -5,8 +5,9 @@ import 'package:post_mobile_application/core/api/api_service_impl.dart';
 class InitialBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ApiService>(
-          () => ApiServiceImpl(),
+    Get.put<ApiService>(
+           ApiServiceImpl(),
     );
   }
 }
+

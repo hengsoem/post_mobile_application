@@ -8,7 +8,6 @@ import 'package:post_mobile_application/routes/app_routes.dart';
 
 Future<void> main() async {
   await GetStorage.init();
-  AccessTokenStorage.clearToken();
   runApp(const MyApp());
 }
 
